@@ -1,6 +1,9 @@
-# Exercise #1: Quiz Game
+# Tools used / learned in this Exercise:
 
-[![exercise status: released](https://img.shields.io/badge/exercise%20status-released-green.svg?style=for-the-badge)](https://gophercises.com/exercises/quiz)
+1. Handling Files in go, working with CSV's
+2. Using flag and log packages
+
+# Exercise #1: Quiz Game
 
 ## Exercise details
 
