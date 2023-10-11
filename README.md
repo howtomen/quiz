@@ -1,7 +1,8 @@
-# Tools used / learned in this Exercise:
+# Tools used / lessons learned in this Exercise:
 
 1. Handling Files in go, working with CSV's
 2. Using flag and log packages
+3. Using Time for timer and as well as a go routine and channels to make the timer work. 
 
 # Exercise #1: Quiz Game
 
@@ -39,7 +40,6 @@ You can assume that quizzes will be relatively short (< 100 questions) and will 
 
 At the end of the quiz the program should output the total number of questions correct and how many questions there were in total. Questions given invalid answers are considered incorrect.
 
-**NOTE:** *CSV files may have questions with commas in them. Eg: `"what 2+2, sir?",4` is a valid row in a CSV. I suggest you look into the CSV package in Go and don't try to write your own CSV parser.*
 
 ### Part 2
 
@@ -55,5 +55,5 @@ At the end of the quiz the program should still output the total number of quest
 
 As a bonus exercises you can also...
 
-1. Add string trimming and cleanup to help ensure that correct answers with extra whitespace, capitalization, etc are not considered incorrect. *Hint: Check out the [strings](https://golang.org/pkg/strings/) package.*
+1. Add string trimming and cleanup to help ensure that correct answers with extra whitespace, capitalization, etc are not considered incorrect. 
 2. Add an option (a new flag) to shuffle the quiz order each time it is run.

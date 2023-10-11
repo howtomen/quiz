@@ -7,12 +7,14 @@ import (
 	"log"
 	"os"
 	"strings"
+	"time"
 )
 
 var (
 	score     int
 	file_path string
 	res       string
+	timeLimit int
 )
 
 type problem struct {
@@ -41,17 +43,29 @@ func parseFile(file *os.File) []problem {
 }
 
 func takeQuiz(problems []problem) {
+	timer := time.NewTimer(time.Duration(timeLimit) * time.Second)
 
-	for _, prob := range problems {
-		fmt.Println(prob.q)
-		fmt.Scanln(&res)
-		if normalize(res) == normalize(prob.a) {
-			score++
+	for i, prob := range problems {
+		fmt.Printf("Problem %d: %s = ", i+1, prob.q)
+		ansCh := make(chan string)
+		go func() {
+			fmt.Scanln(&res)
+			ansCh <- res
+		}()
+		select {
+		case <-timer.C:
+			return
+		case answer := <-ansCh:
+			if normalize(answer) == normalize(prob.a) {
+				score++
+			}
 		}
 	}
+
 }
 func main() {
 	flag.StringVar(&file_path, "path", "problems.csv", "Location of CSV with Questions and answers in question,answer format") //String(name,defaultValue,usage)
+	flag.IntVar(&timeLimit, "timer", 30, "the time limit for the quiz in seconds")
 	flag.Parse()
 
 	file, error := os.Open(file_path)
@@ -64,5 +78,5 @@ func main() {
 
 	takeQuiz(problems)
 
-	fmt.Printf("You got %d correct out of %d", score, len(problems))
+	fmt.Printf("\nYou got %d correct out of %d", score, len(problems))
 }
